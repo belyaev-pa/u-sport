@@ -6,12 +6,12 @@
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
-      <th>{% trans "Delete" %}</th>
-      <th>{% trans "Image" %}</th>
-      <th>{% trans "Title" %}</th>
-      <th>{% trans "Quantity" %}</th>
-      <th>{% trans "Price" %}</th>
-      <th>{% trans "Total" %}</th>
+      <th>Удалить</th>
+      <th>Фото</th>
+      <th>Наименование</th>
+      <th>Количество</th>
+      <th>Цена</th>
+      <th>Итог</th>
     </tr>
   </thead>
   <tbody>
@@ -36,7 +36,7 @@
       <td></td>
       <td></td>
       <td></td>
-      <td><b>{% trans "Total order price" %}</b></td>
+      <td><b>Общая цена заказа</b></td>
       <td>{{ cart.summary|floatformat:2 }} p.</td>
     </tr>
   </tbody>
@@ -44,7 +44,7 @@
 <div class="row">
   <div class="col-md-24 col-xs-24 col-sm-24 col-lg-24">
     <button type="button" class="btn btn-default btn-right" onclick="$('#checkout').modal({keyboard: true});">
-    {% trans "Checkout" %}
+    Оформить заказ
     </button>
   </div>
 </div>
@@ -55,13 +55,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <button class="close" type="button" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">{% trans 'Fill all fields for order' %}</h4>
+          <h4 class="modal-title">Заполните необходимые поля</h4>
         </div>
         <div class="modal-body">
           {{ form.as_p }}
         </div>
         <div class="modal-footer">
-          <button type="Submit" class="btn btn-default btn-right">{% trans 'Send' %}</button><br />
+          <button type="Submit" class="btn btn-default btn-right">Оформить</button><br />
         </div>
       </div>
     </div>
