@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      {% load staticfiles %}
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <link rel="icon" href="{% static 'main/images/favicon.ico' %}" type="image/x-icon">
+      <link rel="stylesheet" type="text/css" href="{% static 'main/css/style.css' %}" />
+      <link rel="stylesheet" type="text/css" href="{% static 'main/css/jquery.fancybox.min.css' %}" media="screen" />
+      <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/admin/media/css/ie.css" /><![endif]-->
+      <!--[if lt IE 9]>
+        <script type="text/javascript" src="{% static 'main/js/html5shiv.js' %}"></script>
+        <script type="text/javascript" src="{% static 'main/js/respond.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/admin_base.css' %}" />
+      <![endif]-->
+      <script type="text/javascript" src="{% static 'main/js/jquery-1.12.1.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'main/js/bootstrap.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'main/js/jquery.fancybox.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'main/js/js.js' %}"></script>
+      <title>U-Sport</title>
+    </head>
+    <body>
+      <div class="wrapper container">
+        <header>
+          <div class="row">
+            <div class="col-md-7 col-xs-7 col-sm-7 col-lg-7">
+              <a><img src="{% static 'main/images/head-logo.png' %}" alt="Head logo"></a>
+            </div>
+            <div class="col-md-7 col-xs-7 col-sm-7 col-lg-7"></div>
+            <div class="col-md-10 col-xs-10 col-sm-10 col-lg-10">
+              <div class="row">
+                <div class="col-md-24 col-xs-24 col-sm-24 col-lg-24">
+                  <div class="row">
+                    <div class="col-md-24 col-xs-24 col-sm-24 col-lg-24 text-right">
+                      <h4>{{ setting.number1 }}</h4>
+                    </div>
+                    <div class="col-md-24 col-xs-24 col-sm-24 col-lg-24 text-right">
+                      <h4>{{ setting.number2 }}</h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <nav class="navbar navbar-default">
+          <ul class="nav navbar-nav">
+            <li class="navbar-brand">{{ setting.nav_bar_head }}</li>
+            <li {% block home %}{% endblock %}><a href="{% url 'main:home' %}">О нас</a></li>
+            <li {% block catalogue %}{% endblock %}><a href="{% url 'main:catalogue' %}">Каталог</a></li>
+            <li {% block delivery %}{% endblock %}><a href="{% url 'main:delivery' %}">Доставка</a></li>
+            <li {% block cart %}{% endblock %}><a href="{% url 'main:cart_show' %}">Корзина</a></li>
+          </ul>
+        </nav>
+        <div class="heading"> {% block heading %}{% endblock %} </div>
+        <div class="row"> {% block content %}{% endblock %} </div>
+      </div>
+      <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8 news"></div>
+            <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8 sitemap"></div>
+            <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8 footer-logo">
+              <p>Copyright &copy; 2017 Автор: Беляев П.А.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </body>
+  </html>
