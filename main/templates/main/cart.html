@@ -1,0 +1,70 @@
+{% extends 'main/base.html' %}
+{% load thumbnail %}
+{% block cart %} class="active"{% endblock %}
+{% block heading %}<h1>Корзина</h1>{% endblock %}
+{% block content %}
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>{% trans "Delete" %}</th>
+      <th>{% trans "Image" %}</th>
+      <th>{% trans "Title" %}</th>
+      <th>{% trans "Quantity" %}</th>
+      <th>{% trans "Price" %}</th>
+      <th>{% trans "Total" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in cart %}
+    {% thumbnail item.product.main_photo "64x64" crop="center" as im %}
+    <tr>
+      <td><a class="btn btn-link" onclick="location='{% url 'main:cart_del' item.object_id %}';">&times;</a></td>
+      <td><a class="thumbnail"><img class="img-responsive" src="{{ im.url }}" /></a></td>
+      <td><a href="{% url 'main:item' item.object_id %}">{{ item.product.name }}</a></td>
+      <td>
+        <a class="btn btn-link" onclick="location='{% url 'main:cart_decr' item.object_id %}';">&laquo;</a>
+        {{ item.quantity }}
+        <a class="btn btn-link"  onclick="location='{% url 'main:cart_incr' item.object_id %}';">&raquo;</a>
+      </td>
+      <td>{{ item.product.price|floatformat:2 }} p.</td>
+      <td>{{ item.total_price|floatformat:2 }} p.</td>
+    </tr>
+    {% endthumbnail %}
+    {% endfor %}
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><b>{% trans "Total order price" %}</b></td>
+      <td>{{ cart.summary|floatformat:2 }} p.</td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-md-24 col-xs-24 col-sm-24 col-lg-24">
+    <button type="button" class="btn btn-default btn-right" onclick="$('#checkout').modal({keyboard: true});">
+    {% trans "Checkout" %}
+    </button>
+  </div>
+</div>
+<form enctype="multipart/form-data" action="{% url 'main:checkout' %}" method="post" role="form">
+  {% csrf_token %}
+  <div class="modal fade" id="checkout" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{% trans 'Fill all fields for order' %}</h4>
+        </div>
+        <div class="modal-body">
+          {{ form.as_p }}
+        </div>
+        <div class="modal-footer">
+          <button type="Submit" class="btn btn-default btn-right">{% trans 'Send' %}</button><br />
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
