@@ -1,0 +1,6 @@
+{% extends 'main/base.html' %}
+{% block delivery %} class="active"{% endblock %}
+{% block heading %}<h1>Доставка</h1>{% endblock %}
+{% block content %}
+{{ setting.delivery|safe }}
+{% endblock %}
