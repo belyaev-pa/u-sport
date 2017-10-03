@@ -1,0 +1,11 @@
+<h1>Добрый день, {{ manager }}.</h1>
+<p>Заказчик, {{ customer }}, телефон {{ phone }}, оформил заказ на следующие товары:
+  <ul>
+    {% for product in object_list %}
+    <li> {{ product.title }}, {{ product.quantity }} * {{ product.price }}{% if forloop.last %}.{% else %};{% endif %}</li>
+    {% endfor %}
+  </ul>
+</p>
+<p>Общая сумма заказа: {{ price }}.</p>
+<p>Адрес доставки: {{ ship_to }}.</p>
+<p>Комментарий: {{ comment }}.</p> 
