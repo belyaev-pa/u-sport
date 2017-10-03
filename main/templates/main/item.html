@@ -1,0 +1,47 @@
+{% extends 'main/catalogue.html' %}
+{% load ttags %}
+{% load thumbnail %}
+{% block catalogue-content %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p class="lead">{{ item.name }}</p>
+    <p>{{ item.description|safe }}</p><br />
+    <div class="row">
+      {% for obj in item.photo_set.all %}
+      {% thumbnail obj.photo "255x255" crop="center" as im %}
+      {% if forloop.counter|drob3 != 0 %}
+      <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8">
+        <a class="thumbnail" data-fancybox="gallery" href="{{ obj.photo.url }}">
+          <img class="img-responsive" src="{{ im.url }}" />
+        </a>
+      </div>
+      {% else %}
+      <div class="col-md-8 col-xs-8 col-sm-8 col-lg-8">
+        <a class="thumbnail" data-fancybox="gallery" href="{{ obj.photo.url }}">
+          <img class="img-responsive" src="{{ im.url }}" />
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      {% endif %}
+      {% endthumbnail %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+        <h4>Цена: {{ item.price|floatformat:2 }} р.</h4>
+      </div>
+      <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">          
+        <button id="add_to_cart" type="button" product_id="{{ item.id }}" class="btn btn-default pull-right" onclick="location.href='{% url 'main:cart_add' item.id %}'">Добавить в корзину</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("a.fancyimage").fancybox();
+  });
+</script>
+{% endblock %}
