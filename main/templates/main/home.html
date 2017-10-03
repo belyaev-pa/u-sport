@@ -1,0 +1,6 @@
+{% extends 'main/base.html' %}
+{% block home %} class="active"{% endblock %}
+{% block heading %}<h1>Главная</h1>{% endblock %}
+{% block content %}
+{{ setting.about_us|safe }}
+{% endblock %}
